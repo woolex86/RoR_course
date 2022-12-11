@@ -11,5 +11,3 @@ if weight > 0
 else
   puts "Ваш вес уже оптимальный"
 end
-
-
