@@ -10,18 +10,11 @@ loop do
   puts 'Enter quantity'
   quantity = gets.chomp.to_f
 
-  products[product] = { unit_price => quantity }
+  products[product] = { price: unit_price, quantity: quantity }
 end
 
 puts products
 
-total_price = 0
+total_price = products.values.sum { |value| value[:price] * value[:quantity] }
 
-products.each do |product, nested|
-  nested.each do |unit_price, quantity|
-    total_price += unit_price * quantity
-    puts "#{product}: #{unit_price * quantity}"
-  end
-end
-
-puts "Grand total: #{total_price}."
+puts "Sum of all purchases: #{total_price}."
