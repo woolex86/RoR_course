@@ -11,7 +11,7 @@ class Interface
   def create_station
     puts 'Enter station name: '
     station_name = gets.strip
-    stations_list << Station.new(station_name)
+    stations << Station.new(station_name)
     puts "You create new station #{station_name}"
   end
   
@@ -24,10 +24,10 @@ class Interface
     user_train_type = gets.to_i
     case user_train_type
     when 1
-      @trains_list << CargoTrain.new(user_train_number)
+      @trains << CargoTrain.new(user_train_number)
       puts "You have created a train type cargo, number: #{user_train_number}."
     when 2
-      @trains_list << PassengerTrain.new(user_train_number)
+      @trains << PassengerTrain.new(user_train_number)
       puts "You have created a train type passenger, number: #{user_train_number}."
     end
   end
@@ -36,11 +36,11 @@ class Interface
     puts 'Enter the first and last station on the route'
     puts 'Enter the first station'
     show_stations
-    user_first_station = @stations_list[gets.chomp.to_i - 1]
+    user_first_station = @stations[gets.chomp.to_i - 1]
     puts 'Enter last station'
     show_stations
-    user_last_station = @stations_list[gets.chomp.to_i - 1]
-    routes_list << Route.new(user_first_station, user_last_station)
+    user_last_station = @stations[gets.chomp.to_i - 1]
+    routes << Route.new(user_first_station, user_last_station)
     puts "Added stations to the route #{Route.new(user_first_station, user_last_station).show_stations}"
   end
   
@@ -112,49 +112,49 @@ class Interface
   end
 
   def show_trains_on_the_station
-    stations_list.each.with_index(1) do |station, number|
+    stations.each.with_index(1) do |station, number|
       puts "#{number} - #{station.title}, #{station.show_train}"
     end
   end
 
   private # т.к. методы используются только внутри класса
 
-  attr_accessor :stations_list, :trains_list, :routes_list
+  attr_accessor :stations, :trains, :routes
 
   def initialize
-    @stations_list = []
-    @trains_list = []
-    @routes_list = []
+    @stations = []
+    @trains = []
+    @routes = []
   end
 
 
   def show_stations
-    stations_list.each.with_index(1) do |station, number|
+    stations.each.with_index(1) do |station, number|
       puts "#{number} - #{station.title}"
     end
   end
 
   def show_trains
-    trains_list.each.with_index(1) do |train, number|
+    trains.each.with_index(1) do |train, number|
       puts "#{number} - #{train.number}, #{train.class}"
     end
   end
 
   def show_routes
-    routes_list.each.with_index(1) do |route, number|
+    routes.each.with_index(1) do |route, number|
       puts "#{number} - #{route.show_stations}"
     end
   end
 
   def choosen_station(number)
-    @stations_list[number]
+    @stations[number]
   end
 
   def choosen_train(number)
-    @trains_list[number]
+    @trains[number]
   end
 
   def choosen_route(number)
-    @routes_list[number]
+    @routes[number]
   end
 end
