@@ -11,13 +11,7 @@ class Train
   end
 
   def self.find(number)
-    @@all_trains.find do |train|
-      if train.number == number
-        number
-      else
-        nil
-      end
-    end
+    @@all_trains.find {|train| train.number == number}
   end
 
   def initialize(number, object_name)
