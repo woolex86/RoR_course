@@ -15,6 +15,9 @@ class Interface
     station_name = gets.strip
     stations << Station.new(station_name)
     puts "You create new station #{station_name}"
+  rescue RuntimeError => e
+    puts "#{e.message}"
+    retry
   end
   
   def create_train
@@ -24,7 +27,7 @@ class Interface
       1 - cargo
       2 - passenger'
     user_train_type = gets.chomp.to_i
-    raise "You did not enter the type of train" if user_train_type > 2 
+    raise "You did not enter the type of train" if user_train_type > 2 || user_train_type == /^[a-z]$/i
     case user_train_type
     when 1
       @trains << CargoTrain.new(user_train_number)
@@ -33,8 +36,8 @@ class Interface
       @trains << PassengerTrain.new(user_train_number)
       puts "You have created a train type passenger, number: #{user_train_number}."
     end
-  rescue RuntimeError
-    puts 'Incorrect data was entered, please try again'
+  rescue RuntimeError => e
+    puts "#{e.message}"
     retry
   end
   
@@ -48,6 +51,9 @@ class Interface
     user_last_station = @stations[gets.chomp.to_i - 1]
     routes << Route.new(user_first_station, user_last_station)
     puts "Added stations to the route #{Route.new(user_first_station, user_last_station).show_stations}"
+  rescue RuntimeError => e
+    puts "#{e.message}"
+    retry
   end
   
   def add_station_route

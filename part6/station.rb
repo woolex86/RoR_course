@@ -10,9 +10,9 @@ class Station
   def initialize(title)
     @title = title
     @trains = []
+    validate!
     @@stations << self
     register_instance
-    validate!
   end 
 
   def self.all
@@ -47,5 +47,4 @@ class Station
   def validate!
     raise 'The name of the station is not correct, please reduce the number of letters to ten' if title.length < 2
   end
-
 end

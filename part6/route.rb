@@ -7,9 +7,9 @@ class Route
   
   def initialize(start_station, end_station)
     @stations = [start_station, end_station]
+    validate!
     @name = "#{start_station.title} - #{end_station.title}"
     register_instance
-    validate!
   end
 
   def valid?
@@ -44,5 +44,4 @@ class Route
     raise "No start or end stop selected" if stations[0] == nil || stations[1] == nil
     raise "Start and end stops must be different" if stations[0] == stations[1]
   end
-
 end

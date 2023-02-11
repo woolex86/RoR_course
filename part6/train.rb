@@ -22,9 +22,9 @@ class Train
     @number = number
     @current_speed = 0
     @wagons = []
+    validate!
     @@all_trains << self
     register_instance
-    validate!
   end
 
   def speed_up(speed)
@@ -100,5 +100,4 @@ class Train
   def validate!
     raise 'Number has invalid format' if number !~ NUMBER_FORMAT
   end
-
 end
