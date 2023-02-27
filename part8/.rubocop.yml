@@ -1,0 +1,13 @@
+Metrics/AbcSize:
+  Exclude:
+    - "interface.rb"
+    - "route.rb"
+
+Metrics/ClassLength:
+  Max: 200
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/MethodLength:
+  Max: 25

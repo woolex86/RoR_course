@@ -11,14 +11,18 @@ class Train
 
   attr_reader :wagons, :current_station_index, :station, :route, :current_speed, :number, :type
 
-  @@all_trains = []
+  @all_trains = []
+
+  class << self
+    attr_accessor :all_trains
+  end
 
   def self.all
-    @@all_trains
+    @all_trains
   end
 
   def self.find(number)
-    @@all_trains.find { |train| train.number == number }
+    @all_trains.find { |train| train.number == number }
   end
 
   def initialize(number)
@@ -27,7 +31,7 @@ class Train
     @type = nil
     @wagons = []
     validate!
-    @@all_trains << self
+    self.class.all_trains << self
     register_instance
   end
 

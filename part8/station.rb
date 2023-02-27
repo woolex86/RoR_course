@@ -5,20 +5,24 @@ require_relative 'instance_counter'
 class Station
   include InstanceCounter
 
-  attr_accessor :trains, :title
+  @stations = []
 
-  @@stations = []
+  class << self
+    attr_accessor :stations
+  end
+
+  attr_accessor :trains, :title
 
   def initialize(title)
     @title = title
     @trains = []
     validate!
-    @@stations << self
+    self.class.stations << self
     register_instance
   end
 
   def self.all
-    @@stations
+    @stations
   end
 
   def each_train(&block)
