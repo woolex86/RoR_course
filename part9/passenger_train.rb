@@ -5,6 +5,8 @@ class PassengerTrain < Train
 
   @all_trains = []
 
+  @validations = superclass.instance_variable_get(:@validations)
+
   def initialize(number)
     super
     @type = 'passenger'

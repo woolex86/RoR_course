@@ -2,14 +2,20 @@
 
 require_relative 'instance_counter'
 require_relative 'name_object'
+require_relative 'validation'
+require_relative 'accessors'
 
 class Train
+  extend Accessors
   include NameObject
   include InstanceCounter
+  include Validation
 
   NUMBER_FORMAT = /^\w{3}-?\w{2}$/
 
   attr_reader :wagons, :current_station_index, :station, :route, :current_speed, :number, :type
+
+  validate :number, :format, NUMBER_FORMAT
 
   @all_trains = []
 
@@ -98,18 +104,5 @@ class Train
 
   def wagons_amount
     @wagons.length
-  end
-
-  def valid?
-    validate!
-    true
-  rescue StandardError
-    false
-  end
-
-  protected
-
-  def validate!
-    raise 'Number has invalid format' if number !~ NUMBER_FORMAT
   end
 end

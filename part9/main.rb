@@ -4,12 +4,16 @@ require_relative 'route'
 require_relative 'station'
 require_relative 'cargo_wagon'
 require_relative 'passenger_wagon'
+require_relative 'wagon'
 require_relative 'train'
 require_relative 'passenger_train'
 require_relative 'cargo_train'
 require_relative 'interface'
 require_relative 'instance_counter'
 require_relative 'name_object'
+require_relative 'validation'
+
+@interface = Interface.new
 
 MENU = {
   1 => { title: 'create station', action: :create_station },
@@ -40,7 +44,7 @@ def gets_action
 end
 
 def call_action(choice)
-  Interface.new.send(MENU[choice][:action])
+  @interface.send(MENU[choice][:action])
 end
 
 loop do
